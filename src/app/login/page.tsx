@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from 'react';
 import { auth, provider } from "../lib/firebase";
 import {
@@ -39,36 +40,60 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 text-black">
-      <div className="w-full max-w-md bg-white rounded shadow-md p-8 space-y-6">
-        <h2 className="text-2xl font-bold text-center text-gray-800">
-          {isSignUp ? 'Create an Account' : 'Login to Your Journal'}
-        </h2>
+    <div className="min-h-screen bg-[#f9fafb] flex items-center justify-center px-4">
+      <div className="w-full max-w-md bg-white rounded-xl shadow-md p-8 space-y-6">
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold text-gray-900">
+            {isSignUp ? 'Create an Account' : 'Sign in'}
+          </h2>
+          {!isSignUp && (
+            <p className="mt-2 text-sm text-gray-500">
+              Enter your email and password to access your journal
+            </p>
+          )}
+        </div>
 
         <form onSubmit={handleEmailAuth} className="space-y-4">
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Email
+            </label>
+            <input
+              type="email"
+              placeholder="your.email@example.com"
+              className="w-full px-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div>
+            <div className="flex justify-between items-center mb-1">
+              <label className="block text-sm font-medium text-gray-700">
+                Password
+              </label>
+              {!isSignUp && (
+                <a href="#" className="text-sm text-indigo-500 hover:underline">
+                  Forgot password?
+                </a>
+              )}
+            </div>
+            <input
+              type="password"
+              placeholder=""
+              className="w-full px-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+            className="w-full bg-gray-900 text-white py-2 rounded-md hover:bg-gray-800 transition"
           >
-            {isSignUp ? 'Sign Up' : 'Login'}
+            {isSignUp ? 'Sign Up' : 'Sign in'}
           </button>
         </form>
 
@@ -76,7 +101,7 @@ export default function LoginPage() {
           {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
           <button
             onClick={() => setIsSignUp(!isSignUp)}
-            className="text-gray-600 hover:underline ml-1 cursor-pointer"
+            className="text-indigo-600 hover:underline ml-1"
           >
             {isSignUp ? 'Login' : 'Sign Up'}
           </button>
@@ -84,21 +109,23 @@ export default function LoginPage() {
 
         <div className="relative my-4">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-300" />
+            <div className="w-full border-t border-gray-200" />
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="bg-white px-2 text-gray-500">or</span>
+            <span className="bg-white px-2 text-gray-400">or</span>
           </div>
         </div>
 
         <button
           onClick={handleGoogleSignIn}
-          className="w-full flex items-center justify-center bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition  cursor-pointer"
+          className="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition"
         >
           Sign in with Google
         </button>
 
-        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+        {error && (
+          <p className="text-sm text-red-500 text-center">{error}</p>
+        )}
       </div>
     </div>
   );

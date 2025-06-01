@@ -1,17 +1,17 @@
-// /lib/firebase.ts
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
+// ✅ Your new Firebase config
 const firebaseConfig = {
-  apiKey: "AIzaSyBixa41ebu3FDs-MMooDa-TBw1xhNW8Oy8",
-  authDomain: "journel-c6f6e.firebaseapp.com",
-  projectId: "journel-c6f6e",
-  storageBucket: "journel-c6f6e.appspot.com", // fixed typo: use `.appspot.com`
-  messagingSenderId: "493978510662",
-  appId: "1:493978510662:web:21d3c6343bdd654c873147",
-  measurementId: "G-1P7VG6G8NM",
+  apiKey: "AIzaSyA-3WNVbjLSqPxW3dFnG7kpqIYHjo-w8ts",
+  authDomain: "journal-app-4d4bb.firebaseapp.com",
+  projectId: "journal-app-4d4bb",
+  storageBucket: "journal-app-4d4bb.firebasestorage.app", // double-check this – see note below
+  messagingSenderId: "815962784111",
+  appId: "1:815962784111:web:20392655b539134d1ae89a",
+  measurementId: "G-6CBRGHV8HV"
 };
 
 // Avoid duplicate initialization

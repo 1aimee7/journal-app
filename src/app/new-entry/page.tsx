@@ -32,7 +32,7 @@ export default function NewEntryPage() {
       await addDoc(collection(db, 'users', user.uid, 'entries'), {
         title,
         content,
-        date: new Date().toISOString(), 
+        date: new Date().toISOString(),
         createdAt: serverTimestamp(),
       });
       router.push('/dashboard');
@@ -44,43 +44,69 @@ export default function NewEntryPage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-gray-100 px-4 py-8 text-black">
-      <div className="max-w-xl mx-auto bg-white shadow-md rounded p-6 space-y-6">
-        <h2 className="text-2xl font-bold text-center">New Journal Entry</h2>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-6xl mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <h1 className="text-xl font-semibold text-gray-900">Personal Journal</h1>
+            <button
+              onClick={() => router.push('/login')}
+              className="text-sm text-gray-600 hover:text-gray-900 transition-colors px-3 py-1 rounded"
+            >
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-bg-gray-600"
-          />
+      {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-6 py-8">
+        <div className="max-w-2xl mx-auto bg-white border border-gray-200 rounded-lg p-8">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6">New Journal Entry</h2>
 
-          <textarea
-            placeholder="Write your thoughts here..."
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-            rows={6}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-bg-gray-600"
-          />
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div>
+              <label className="text-sm text-gray-700 block mb-1">Title</label>
+              <input
+                type="text"
+                placeholder="Give your entry a title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600 text-sm"
+              />
+            </div>
 
-          <button
-            type="submit"
-            className="w-full bg-gray-700 text-white py-2 rounded hover:bg-gray-800  cursor-pointer"
-          >
-            Save Entry
-          </button>
-        </form>
+            <div>
+              <label className="text-sm text-gray-700 block mb-1">Content</label>
+              <textarea
+                placeholder="Write your thoughts here..."
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                required
+                rows={8}
+                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600 text-sm"
+              />
+            </div>
 
-        <button
-          onClick={() => router.push('/dashboard')}
-          className="text-bg-gray-600 hover:underline text-sm block text-center  cursor-pointer"
-        >
-          Cancel and go back
-        </button>
+            <div className="flex justify-between">
+              <button
+                type="button"
+                onClick={() => router.push('/dashboard')}
+                className="w-28 text-gray-600 hover:text-gray-900 text-sm py-2.5 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="w-28 bg-gray-900 text-white py-2.5 rounded-md hover:bg-gray-800 transition-colors text-sm"
+              >
+                Save Entry
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
