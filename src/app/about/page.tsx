@@ -1,6 +1,10 @@
+"use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <div className="min-h-screen bg-gray-50">
    
@@ -72,7 +76,10 @@ export default function Home() {
 
       
         <div className="text-center">
-          <button className="bg-gray-800 text-white px-8 py-3 rounded-lg hover:bg-gray-900 transition-colors text-lg cursor-pointer">
+          <button
+            onClick={() => router.push('/login')}
+            className="bg-gray-800 text-white px-8 py-3 rounded-lg hover:bg-gray-900 transition-colors text-lg cursor-pointer"
+          >
             Start Journaling
           </button>
         </div>
